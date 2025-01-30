@@ -28,4 +28,3 @@ dist-ssr
 ./backend/temp/*
 ./backend/.env
 ./backend/uploads/avatars/*
-!./backend/uploads/avatars/default.jpg

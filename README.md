@@ -86,3 +86,14 @@
    ```bash
    npm run dev
    ```
+
+---
+
+<br />
+
+<div>
+  <p align='center'>
+    <img src='https://media1.tenor.com/m/oKZVauJ1LWEAAAAd/anime-fern.gif' />
+  </p>
+  <h2 align='center'>ᴛʜᴀɴᴋs ᴀɴᴅ ʜᴀᴠᴇ ᴀ ɴɪᴄᴇ ᴅᴀʏ 😊</h2>
+</div>
