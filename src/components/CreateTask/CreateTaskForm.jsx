@@ -52,7 +52,7 @@ const CreateTaskForm = ({
             required
           />
           <TextField
-            label="Название функции"
+            label="Название функции (test(a, b))"
             variant="outlined"
             fullWidth
             margin="normal"
@@ -63,7 +63,7 @@ const CreateTaskForm = ({
             required
           />
           <TextField
-            label="Тесты"
+            label="Тесты (assert название_функции(входные данные) == ожидаемый ответ, 'Expected: ожидаемый_ответ')"
             variant="outlined"
             fullWidth
             margin="normal"

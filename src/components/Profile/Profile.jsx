@@ -6,10 +6,25 @@ import {
   Box,
   Avatar,
   Button,
+  IconButton,
+  TextField,
 } from "@mui/material";
 import { BarLoader } from "react-spinners";
+import { Edit, InsertPhoto } from "@mui/icons-material";
 
-const Profile = ({ user, onLogout, onChangeAvatar, isUpdate }) => {
+const Profile = ({
+  user,
+  onLogout,
+  onChangeAvatar,
+  onChangeBackground,
+  onChangeUsername,
+  isUpdate,
+  isEditing,
+  newUsername,
+  handleCancelClick,
+  handleEditClick,
+  setNewUsername,
+}) => {
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
       <Typography
@@ -21,7 +36,38 @@ const Profile = ({ user, onLogout, onChangeAvatar, isUpdate }) => {
       >
         Профиль
       </Typography>
-      <Paper elevation={3} sx={{ p: 3 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 3,
+          position: "relative",
+          background:
+            user.background == "default"
+              ? "#fff"
+              : `url(http://localhost:${import.meta.env.VITE_API_PORT}${
+                  user.background
+                })`,
+          backgroundSize: "cover"
+        }}
+      >
+        <IconButton
+          aria-label="upload background"
+          component="label"
+          sx={{
+            backgroundColor: "#fff",
+            position: "absolute",
+            right: "30px",
+            top: "30px",
+          }}
+        >
+          <input
+            type="file"
+            hidden
+            accept="image/*"
+            onChange={onChangeBackground}
+          />
+          <InsertPhoto />
+        </IconButton>
         <Box
           sx={{
             display: "flex",
@@ -33,7 +79,9 @@ const Profile = ({ user, onLogout, onChangeAvatar, isUpdate }) => {
           <Box className="changeAvatarBlock">
             <Avatar
               alt={user.username}
-              src={`http://localhost:${import.meta.env.VITE_API_PORT}${user.avatar}`}
+              src={`http://localhost:${import.meta.env.VITE_API_PORT}${
+                user.avatar
+              }`}
               sx={{
                 width: 100,
                 height: 100,
@@ -56,19 +104,67 @@ const Profile = ({ user, onLogout, onChangeAvatar, isUpdate }) => {
           </Box>
           <Avatar
             alt="Level Icon"
-            src={`http://localhost:${import.meta.env.VITE_API_PORT}${user.levelIcon}`}
+            src={`http://localhost:${import.meta.env.VITE_API_PORT}${
+              user.levelIcon
+            }`}
             sx={{ width: 40, height: 40 }}
           />
         </Box>
-        <Box>
-          <Typography
-            variant="h4"
-            component="h1"
-            gutterBottom
-            fontWeight="bold"
-          >
-            {user.username}
-          </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "start",
+            backgroundColor: "#fff",
+            borderRadius: "20px",
+            padding: "15px",
+          }}
+        >
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+            {isEditing ? (
+              <>
+                <TextField
+                  value={newUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
+                  variant="outlined"
+                  size="small"
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={onChangeUsername}
+                >
+                  Сохранить
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleCancelClick}
+                >
+                  Отмена
+                </Button>
+              </>
+            ) : (
+              <>
+                <Typography
+                  variant="h4"
+                  component="h1"
+                  gutterBottom
+                  fontWeight="bold"
+                >
+                  {user.username}
+                </Typography>
+                {user.role === "admin" && (
+                  <Typography fontSize={13} color="error" fontWeight="bold">
+                    [admin]
+                  </Typography>
+                )}
+                <IconButton onClick={handleEditClick} color="#000" >
+                  <Edit />
+                </IconButton>
+              </>
+            )}
+          </Box>
           <Typography variant="body1" color="textSecondary" gutterBottom>
             Логин: {user.email}
           </Typography>

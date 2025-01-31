@@ -13,6 +13,7 @@ const User = ({ user, index, navigate }) => {
           borderRadius: 2,
           boxShadow: 1,
           backgroundColor: "white",
+          minHeight: "110px"
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 2}}>
@@ -22,9 +23,12 @@ const User = ({ user, index, navigate }) => {
             sx={{ width: 60, height: 60 }}
           />
           <Box>
-            <Typography variant="h5" fontWeight="bold">
-              {user.username}
-            </Typography>
+            <Box>
+              <Typography variant="h5" fontWeight="bold">
+                {user.username}
+              </Typography>
+              {user.role === 'admin' && <Typography fontSize={13} color="error" fontWeight="bold">[admin]</Typography>}
+            </Box>
             <Typography
               variant="body1"
               color={"textSecondary"}

@@ -32,7 +32,6 @@ export const runCode = async (req, res) => {
     try {
       PythonShell.run(filePath, { timeout: 5000 })
         .then(async (results) => {
-          fs.unlinkSync(filePath)
           user.completedTasks.push({ answer: code, taskID: taskId });
           user.exp += 100;
           const isLevelUp = await updateUserLevel(user);
@@ -48,6 +47,8 @@ export const runCode = async (req, res) => {
           return res
             .status(500)
             .json({ message: "Ошибка в коде: " + err.message });
+        }).finally(() => {
+          fs.unlinkSync(filePath)
         });
     } catch (error) {
       return res.status(500).json({ message: "Ошибка: " + error.message });

@@ -52,6 +52,18 @@ export const uploadAvatar = async (formData) => {
   });
 };
 
+export const changeBackground = async (formData) => {
+  return await instance.patch('/user/auth/change_background', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+export const changeUsername = async (name) => {
+  return await instance.patch('/user/auth/change_username', {username: name})
+}
+
 // Запросы для выполнения кода
 export const runCode = async (codeData) => {
   return await instance.post('/task/run_code', codeData);

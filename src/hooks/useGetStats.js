@@ -23,7 +23,7 @@ const useGetStats = () => {
     getStats();
   }, [])
 
-  return { completedTasks, remainingPoints }
+  return { completedTasks, remainingPoints, loading }
 }
 
 export default useGetStats;

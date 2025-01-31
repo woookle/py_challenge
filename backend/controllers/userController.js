@@ -149,6 +149,7 @@ export const getUsers = async (req, res) => {
       avatar: el.avatar,
       username: el.username,
       levelIcon: el.levelIcon,
+      role: el.role,
     }));
 
     return res.json({ userList });
@@ -163,7 +164,7 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   try {
     const id = req.params.id;
-    const user = await UserModel.findById(id).select("-password -role -email");
+    const user = await UserModel.findById(id).select("-password -email");
     if (!user) {
       return res.status(404).json({ message: "Пользователь не найден!" });
     }
@@ -196,11 +197,11 @@ export const myStats = async (req, res) => {
     const nextLevelThreshold = levelThresholds.find(
       (threshold) => threshold.level === currentLevel + 1
     );
-    const remainingExp = nextLevelThreshold ? ((user.exp / nextLevelThreshold.expRequired) * 100).toFixed(2) : 100;
+    const remainingExp = nextLevelThreshold
+      ? ((user.exp / nextLevelThreshold.expRequired) * 100).toFixed(2)
+      : 100;
 
-    return res
-      .status(200)
-      .json({ remainingExp, tasks: user.completedTasks });
+    return res.status(200).json({ remainingExp, tasks: user.completedTasks });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -212,7 +213,7 @@ export const myStats = async (req, res) => {
 export const changeAvatar = async (req, res) => {
   try {
     const user = req.user;
-    user.avatar = `/uploads/avatars/${req.file.filename}`;
+    user.avatar = `/uploads/avatars/${req.files["avatar"][0].filename}`;
     await user.save();
     return res
       .status(200)
@@ -221,6 +222,38 @@ export const changeAvatar = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Ошибка при загрузке аватара!", error: error.message });
+  }
+};
+
+export const changeBackground = async (req, res) => {
+  try {
+    const user = req.user;
+    user.background = `/uploads/backgrounds/${req.files["background"][0].filename}`;
+    await user.save();
+    return res.status(200).json({
+      message: "Задний фон успешно изменен!",
+      background: user.background,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Ошибка при загрузке заднего фона!",
+      error: error.message,
+    });
+  }
+};
+
+export const changeUsername = async (req, res) => {
+  try {
+    const user = req.user;
+    user.username = req.body.username;
+    await user.save();
+    return res
+      .status(200)
+      .json({ message: "Имя успешно изменено!", username: user.username });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Ошибка при изменении!", error: error.message });
   }
 };
 

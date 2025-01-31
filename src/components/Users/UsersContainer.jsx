@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const UsersContainer = () => {
   const { filteredUsers, loading, searchTerm, setSearchTerm } = useGetUsers();
   const navigate = useNavigate();
-
   return (
     <>
       <Typography

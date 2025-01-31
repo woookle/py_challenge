@@ -4,7 +4,11 @@ import path from 'path';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/avatars');
+    if (file.fieldname === 'avatar') {
+      cb(null, 'uploads/avatars');
+    } else if (file.fieldname === 'background') {
+      cb(null, 'uploads/backgrounds/');
+    }
   },
   filename: (req, file, cb) => {
     const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;

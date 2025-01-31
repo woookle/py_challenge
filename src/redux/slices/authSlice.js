@@ -6,6 +6,8 @@ import {
   successTask,
   logoutFromAcc,
   avatar,
+  background,
+  username,
 } from "../../api/userAPI";
 
 const initialState = {
@@ -54,7 +56,6 @@ export const authSlice = createSlice({
       .addCase(fetchProfile.rejected, (state, action) => {
         state.loading = false;
       })
-      
       .addCase(avatar.pending, (state) => {
         state.isUpdate = true;
       })
@@ -65,7 +66,12 @@ export const authSlice = createSlice({
       .addCase(avatar.rejected, (state, action) => {
         state.isUpdate = false;
       })
-
+      .addCase(background.fulfilled, (state, action) => {
+        state.user.background = action.payload
+      })
+      .addCase(username.fulfilled, (state, action) => {
+        state.user.username = action.payload
+      })
       .addCase(successTask.fulfilled, (state, action) => {
         state.user = action.payload.user;
       })

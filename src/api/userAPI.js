@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { register, login, getProfile, runCode, logout, uploadAvatar } from "./api";
+import { register, login, getProfile, runCode, logout, uploadAvatar, changeBackground, changeUsername } from "./api";
 import { toast } from "react-toastify";
 
 // Асинхронное действие для регистрации
@@ -74,6 +74,34 @@ export const avatar = createAsyncThunk(
     }
   }
 );
+
+// Асинхронное действие на изменение заднего фона пользователя
+export const background = createAsyncThunk(
+  "auth/changeBackground",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await changeBackground(formData);
+      toast.info('Задний фон успешно обновлен!')
+      return response.data.background
+    } catch (error) {
+      return rejectWithValue(error.response.data)      
+    }
+  }
+)
+
+// Асинхронное действие на изменение имени пользователя
+export const username = createAsyncThunk(
+  "auth/changeUsername",
+  async (name, { rejectWithValue }) => {
+    try {
+      const response = await changeUsername(name);
+      toast.info('Имя успешно обновлено!')
+      return response.data.username
+    } catch (error) {
+      return rejectWithValue(error.response.data)      
+    }
+  }
+)
 
 // Действие если задание выполнено
 export const successTask = createAsyncThunk(

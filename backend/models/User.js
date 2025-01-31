@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   avatar: { type: String, default: '/uploads/avatars/default.jpg' },
   level: { type: Number, default: 1 },
   levelIcon: { type: String, default: '/uploads/levels/level1.png' },
+  background: { type: String, default: 'default' },
   role: { type: String, enum: ['player', 'admin'], default: 'player' },
 });
 
