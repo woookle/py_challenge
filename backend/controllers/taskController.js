@@ -32,7 +32,7 @@ export const runCode = async (req, res) => {
     try {
       PythonShell.run(filePath, { timeout: 5000 })
         .then(async (results) => {
-          // fs.unlinkSync(filePath) deleting a file after its execution
+          fs.unlinkSync(filePath)
           user.completedTasks.push({ answer: code, taskID: taskId });
           user.exp += 100;
           const isLevelUp = await updateUserLevel(user);

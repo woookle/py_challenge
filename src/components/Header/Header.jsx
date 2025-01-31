@@ -51,7 +51,7 @@ const Header = () => {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "white",
+          backgroundColor: "#f4f3ee",
           color: "black",
           boxShadow: "none",
           zIndex: 1200,
