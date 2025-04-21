@@ -16,14 +16,7 @@ const Footer = () => {
         <a
           href="https://github.com/woookle"
           target="_blank"
-          style={{
-            color: "black",
-            textDecoration: "none",
-            fontWeight: "bold",
-            "&:hover": {
-              textDecoration: "underline",
-            },
-          }}
+          className="footer_link"
         >
           @woookle
         </a>

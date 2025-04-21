@@ -150,6 +150,7 @@ export const getUsers = async (req, res) => {
       username: el.username,
       levelIcon: el.levelIcon,
       role: el.role,
+      background: el.background,
     }));
 
     return res.json({ userList });

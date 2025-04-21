@@ -14,6 +14,7 @@ import Users from "./pages/Users.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import CreateTask from "./pages/CreateTask.jsx";
 import Stats from "./pages/Stats.jsx";
+import Banlist from "./pages/Banlist.jsx";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.user);
@@ -44,13 +45,18 @@ function App() {
               <Routes>
                 <Route path="/login" element={isAuth ? <Navigate to={"/"} /> : <Login />} />
                 <Route path="/register" element={isAuth ? <Navigate to={"/"} /> : <Register />} />
+                
                 <Route path="/" element={isAuth ? <Main /> : <Navigate to={"/login"} />} />
                 <Route path="/profile" element={isAuth ? <Profile /> : <Navigate to={"/login"} />} />
                 <Route path="/users" element={isAuth ? <Users /> : <Navigate to={"/login"} />} />
                 <Route path="/user/:id" element={isAuth ? <UserProfile /> : <Navigate to={"/login"} />} />
                 <Route path="/task/:id" element={isAuth ? <Solving /> : <Navigate to={"/login"} />} />
-                <Route path="/create" element={isAuth ? <CreateTask /> : <Navigate to={"/login"} />} />
                 <Route path="/stats" element={isAuth ? <Stats /> : <Navigate to={"/login"} />} />
+
+                <Route path="/admin/create" element={isAuth && (isAuth.role === "admin" || isAuth.role === 'mainAdmin') ? <CreateTask /> : <Navigate to={"/"} />} />
+                <Route path="/admin/banlist" element={isAuth && (isAuth.role === "admin" || isAuth.role === 'mainAdmin') ? <Banlist /> : <Navigate to={"/"} />} />
+
+                <Route path="*" element={isAuth ? <Main /> : <Navigate to={'/login'} />} />
               </Routes>
             </Container>
           </Box>

@@ -1,8 +1,9 @@
 import { Avatar, Box, Typography, Grid, Button } from "@mui/material";
+import UserBanDialogContainer from "../../UserBanDialog/UserBanDialogContainer";
 
-const User = ({ user, index, navigate }) => {
+const BannedUser = ({ user, index }) => {
   return (
-    <Grid item xs={12} sm={6} md={4} key={index}>
+    <Grid item xs={12} sm={6} md={6} key={index}>
       <Box
         sx={{
           display: "flex",
@@ -55,35 +56,15 @@ const User = ({ user, index, navigate }) => {
                   [Админ]
                 </Typography>
               )}
-              {user.role === 'mainAdmin' && (
-                <Typography fontSize={13} color="#9400d3" fontWeight="bold">
-                  [Гл. Админ]
-                </Typography>
-              )}
             </Box>
           </Box>
         </Box>
         <Box>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "white",
-              color: "black",
-              "&:hover": {
-                backgroundColor: "black",
-                color: "white",
-              },
-            }}
-            onClick={() => {
-              navigate(`/user/${user._id}`);
-            }}
-          >
-            профиль
-          </Button>
+          {/* <UserBanDialogContainer user={user} /> */}
         </Box>
       </Box>
     </Grid>
   );
 };
 
-export default User;
+export default BannedUser;

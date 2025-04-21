@@ -21,7 +21,7 @@ const CreateTaskForm = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "720px",
+        width: "850px",
         maxWidth: "90%",
         margin: "40px auto 0 auto",
       }}

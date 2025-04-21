@@ -7,8 +7,9 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
+import BanDialogContainer from "../BanDialog/BanDialogContainer";
 
-const UserProfile = ({ userProfile, navigate }) => {
+const UserProfile = ({ userProfile, navigate, user }) => {
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
       <Typography
@@ -26,20 +27,19 @@ const UserProfile = ({ userProfile, navigate }) => {
           p: 3,
           background:
             userProfile.background == "default"
-              ? "#fff"
-              : `url(http://localhost:${import.meta.env.VITE_API_PORT}${
-                  userProfile.background
-                })`,
+              ? "#000"
+              : `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://localhost:${
+                  import.meta.env.VITE_API_PORT
+                }${userProfile.background}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
             mb: 3,
+            width: 100,
+            position: "relative",
           }}
         >
           <Avatar
@@ -54,7 +54,13 @@ const UserProfile = ({ userProfile, navigate }) => {
             src={`http://localhost:${import.meta.env.VITE_API_PORT}${
               userProfile.levelIcon
             }`}
-            sx={{ width: 40, height: 40 }}
+            sx={{
+              width: 40,
+              height: 40,
+              position: "absolute",
+              bottom: "0",
+              right: "-5px",
+            }}
           />
         </Box>
         <Box
@@ -92,7 +98,9 @@ const UserProfile = ({ userProfile, navigate }) => {
             Выполненных заданий: {userProfile.completedTasks?.length}
           </Typography>
         </Box>
-        <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{ mt: 3, display: "flex", justifyContent: "center", gap: "10px" }}
+        >
           <Button
             variant="contained"
             color="error"
@@ -102,6 +110,9 @@ const UserProfile = ({ userProfile, navigate }) => {
           >
             Назад
           </Button>
+          {user.role === "admin" && user._id !== userProfile._id && (
+            <BanDialogContainer userProfile={userProfile} />
+          )}
         </Box>
       </Paper>
     </Container>

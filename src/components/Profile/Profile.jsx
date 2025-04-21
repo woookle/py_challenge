@@ -43,10 +43,10 @@ const Profile = ({
           position: "relative",
           background:
             user.background == "default"
-              ? "#fff"
-              : `url(http://localhost:${import.meta.env.VITE_API_PORT}${
-                  user.background
-                })`,
+              ? "#000"
+              : `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://localhost:${
+                  import.meta.env.VITE_API_PORT
+                }${user.background}")`,
           backgroundSize: "cover"
         }}
       >
@@ -70,10 +70,10 @@ const Profile = ({
         </IconButton>
         <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
             gap: 1,
             mb: 3,
+            width: 100,
+            position: "relative",
           }}
         >
           <Box className="changeAvatarBlock">
@@ -107,7 +107,7 @@ const Profile = ({
             src={`http://localhost:${import.meta.env.VITE_API_PORT}${
               user.levelIcon
             }`}
-            sx={{ width: 40, height: 40 }}
+            sx={{ width: 40, height: 40, position: "absolute", bottom: "0", right: "-5px" }}
           />
         </Box>
         <Box
@@ -122,7 +122,7 @@ const Profile = ({
         >
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
             {isEditing ? (
-              <>
+              <Box sx={{ display: "flex", gap: "5px", mb: "13px" }}>
                 <TextField
                   value={newUsername}
                   onChange={(e) => setNewUsername(e.target.value)}
@@ -143,7 +143,7 @@ const Profile = ({
                 >
                   Отмена
                 </Button>
-              </>
+              </Box>
             ) : (
               <>
                 <Typography

@@ -78,3 +78,16 @@ export const getUsers = async () => {
 export const getUserById = async (id) => {
   return await instance.get('/user/' + id)
 }
+
+// Запросы для админов
+export const getBanList = async () => {
+  return await instance.get('/admin/ban/list');
+}
+
+export const banUser = async (id, reason) => {
+  return await instance.post('/admin/ban/' + id, {reason});
+}
+
+export const unBanUser = async (id) => {
+  return await instance.post('/admin/unban/' + id)
+}

@@ -25,7 +25,6 @@ const TasksContainer = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: 3,
         }}
       >
         <TextField
@@ -36,6 +35,7 @@ const TasksContainer = () => {
           onChange={(e) => setFilter(e.target.value)}
           sx={{
             width: "50%",
+            mb: "24px",
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "white",

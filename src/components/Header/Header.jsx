@@ -37,9 +37,14 @@ const Header = () => {
 
   const menuItems = [
     {
+      text: "Банлист",
+      to: "/admin/banlist",
+      visible: user.role === "admin" || user.role === 'mainAdmin',
+    },
+    {
       text: "Создать",
-      to: "/create",
-      visible: user.role === "admin",
+      to: "/admin/create",
+      visible: user.role === "admin" || user.role === 'mainAdmin',
     },
     { text: "Задания", to: "/" },
     { text: "Пользователи", to: "/users" },

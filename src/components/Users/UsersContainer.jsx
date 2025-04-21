@@ -23,7 +23,6 @@ const UsersContainer = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: 3,
         }}
       >
         <TextField
@@ -34,6 +33,7 @@ const UsersContainer = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           sx={{
             width: "50%",
+            mb: "24px",
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "white",

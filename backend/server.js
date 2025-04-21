@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import taskRoutes from "./routes/taskRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -19,6 +20,7 @@ mongoose.connect(process.env.MONGO_URI);
 
 app.use('/user', userRoutes);
 app.use("/task", taskRoutes);
+app.use("/admin", adminRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT} || enjoy ;3`);

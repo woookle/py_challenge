@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 import { getUserById } from "../../api/api";
 import UserProfile from "./UserProfile";
 import { BarLoader } from "react-spinners";
+import { useSelector } from "react-redux";
 
 const UserProfileContainer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [ userProfile, setUserProfile ] = useState([]);
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     async function getUserProfile() {
       try {
@@ -34,7 +36,7 @@ const UserProfileContainer = () => {
   }
 
   return (
-    <UserProfile userProfile={userProfile} navigate={navigate} />
+    <UserProfile userProfile={userProfile} navigate={navigate} user={user} />
   )
 }
 

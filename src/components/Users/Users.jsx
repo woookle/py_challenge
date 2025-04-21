@@ -24,7 +24,6 @@ const Users = ({ filteredUsers, loading, navigate }) => {
               alignItems: "center",
               color: "white",
               width: "100%",
-              mt: 2,
             }}
           >
             <Cancel sx={{ fontSize: 32 }} />
